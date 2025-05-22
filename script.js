@@ -1,25 +1,29 @@
-document.getElementById('loginForm').addEventListener('submit', async function (e) {
-  e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('loginForm');
 
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-  try {
-    const res = await fetch('https://secure-api-render.onrender.com/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    });
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-    const data = await res.json();
+    try {
+      const res = await fetch('https://secure-api-render.onrender.com/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
 
-    if (res.ok) {
-      alert('✅ Login exitoso: ' + data.message);
-    } else {
-      alert('❌ Error: ' + data.message);
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('✅ Login exitoso: ' + data.message);
+      } else {
+        alert('❌ Usuario o contraseña incorrectos: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+      alert('🚫 No se pudo conectar con el servidor.');
     }
-  } catch (error) {
-    console.error('Error de red:', error);
-    alert('🚫 No se pudo conectar con el servidor');
-  }
+  });
 });
