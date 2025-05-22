@@ -1,5 +1,5 @@
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
-  e.preventDefault(); // evitar recarga del formulario
+  e.preventDefault();
 
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
@@ -19,7 +19,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
       alert('❌ Error: ' + data.message);
     }
   } catch (error) {
-    console.error('Error en la conexión:', error);
+    console.error('Error de red:', error);
     alert('🚫 No se pudo conectar con el servidor');
   }
 });
